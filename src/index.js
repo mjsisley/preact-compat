@@ -337,9 +337,9 @@ function applyEventNormalization({ nodeName, attributes }) {
 	}
 	if (props.onchange) {
 		nodeName = nodeName.toLowerCase();
-		let attr = nodeName==='input' && /^che|rad|file/i.test(attributes.type) ? 'onclick' : 'oninput',
+		let attr = nodeName==='input' && /^che|rad/i.test(attributes.type) ? 'onclick' : 'oninput',
 			normalized = props[attr] || attr;
-		if (!attributes[normalized]) {
+		if (!attributes[normalized] && attribute.type !== 'file') {
 			attributes[normalized] = multihook([attributes[props[attr]], attributes[props.onchange]]);
 			delete attributes[props.onchange];
 		}
